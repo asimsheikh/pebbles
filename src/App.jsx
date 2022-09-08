@@ -247,8 +247,8 @@ export default function App() {
   const loadData = async () => {
     let headers = { method: "POST",
       headers: { Accept: "*/*", "Content-Type": "application/json" },
-      body: JSON.stringify({ "type": "GET_PEBBLES", "payload": { "userid": 1, "search_date": "2022-09-06"}})
-    };
+      body: JSON.stringify({ "type": "GET_PEBBLES",
+                             "payload": { "userid": 1, "search_date": "2022-09-07"}}) };
 
     const response = await fetch( "https://vercel-sqlalchemy.vercel.app/api", headers);
     const content = await response;
