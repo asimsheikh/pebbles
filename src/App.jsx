@@ -3,21 +3,10 @@ import './index.css'
 
 const Pebble = ({ id, cx, cy, r, description, clicked, dispatch }) => {
   return (
-    <circle
-      cx={cx}
-      cy={cy}
-      r={r}
-      fill={clicked ? "lightgrey" : "white"}
-      strokeWidth="1"
-      stroke={description ? "red" : "lightgrey"}
-      onClick={() => {
-        // setClick(!click)
-        dispatch({
-          type: "CLICKED_PEBBLE",
-          payload: { id: id, clicked: !clicked }
-        });
-      }}
-    />
+    <circle cx={cx} cy={cy} r={r} fill={clicked ? "lightgrey" : "white"}
+      strokeWidth="1" stroke={description ? "red" : "lightgrey"}
+      onClick={() => { dispatch({ type: "CLICKED_PEBBLE", payload: { id: id, clicked: !clicked } });
+      }} />
   );
 };
 
@@ -37,12 +26,7 @@ const PebbleData = ({ id, description, dispatch }) => {
       <div className="flex">
         <button
           className="bg-blue-400 my-2 w-1/2 p-2 text-lg text-white rounded-lg mr-2 "
-          onClick={() =>
-            dispatch({
-              type: "UPDATE_PEBBLE",
-              payload: { id: id, description: text }
-            })
-          }
+          onClick={() => dispatch({ type: "UPDATE_PEBBLE", payload: { id: id, description: text } }) }
         >
           Update
         </button>
@@ -60,14 +44,9 @@ const PebblesAllocation = ({ allocations }) => {
       <p>Pebble Allocations</p>
       <div className="mt-2 text-xl font-normal">
         {[...allocations].map((key) => {
-          return key[0] === "" ? (
-            <p></p>
-          ) : (
-            <p>
-              {key[1]} {key[0]}
-            </p>
-          );
-        })}
+          return key[0] === "" 
+                ? ( <p></p>) 
+                : ( <p> {key[1]} {key[0]} </p>) })}
       </div>
     </div>
   );
@@ -160,213 +139,29 @@ const initialState = {
     { id: 70, x: 950, y: 150, r: 20, description: "", col: 18, clicked: false },
     { id: 71, x: 950, y: 200, r: 20, description: "", col: 18, clicked: false },
     { id: 72, x: 950, y: 250, r: 20, description: "", col: 18, clicked: false },
-    {
-      id: 73,
-      x: 1000,
-      y: 100,
-      r: 20,
-      description: "",
-      col: 19,
-      clicked: false
-    },
-    {
-      id: 74,
-      x: 1000,
-      y: 150,
-      r: 20,
-      description: "",
-      col: 19,
-      clicked: false
-    },
-    {
-      id: 75,
-      x: 1000,
-      y: 200,
-      r: 20,
-      description: "",
-      col: 19,
-      clicked: false
-    },
-    {
-      id: 76,
-      x: 1000,
-      y: 250,
-      r: 20,
-      description: "",
-      col: 19,
-      clicked: false
-    },
-    {
-      id: 77,
-      x: 1050,
-      y: 100,
-      r: 20,
-      description: "",
-      col: 20,
-      clicked: false
-    },
-    {
-      id: 78,
-      x: 1050,
-      y: 150,
-      r: 20,
-      description: "",
-      col: 20,
-      clicked: false
-    },
-    {
-      id: 79,
-      x: 1050,
-      y: 200,
-      r: 20,
-      description: "",
-      col: 20,
-      clicked: false
-    },
-    {
-      id: 80,
-      x: 1050,
-      y: 250,
-      r: 20,
-      description: "",
-      col: 20,
-      clicked: false
-    },
-    {
-      id: 81,
-      x: 1100,
-      y: 100,
-      r: 20,
-      description: "",
-      col: 21,
-      clicked: false
-    },
-    {
-      id: 82,
-      x: 1100,
-      y: 150,
-      r: 20,
-      description: "",
-      col: 21,
-      clicked: false
-    },
-    {
-      id: 83,
-      x: 1100,
-      y: 200,
-      r: 20,
-      description: "",
-      col: 21,
-      clicked: false
-    },
-    {
-      id: 84,
-      x: 1100,
-      y: 250,
-      r: 20,
-      description: "",
-      col: 21,
-      clicked: false
-    },
-    {
-      id: 85,
-      x: 1150,
-      y: 100,
-      r: 20,
-      description: "",
-      col: 22,
-      clicked: false
-    },
-    {
-      id: 86,
-      x: 1150,
-      y: 150,
-      r: 20,
-      description: "",
-      col: 22,
-      clicked: false
-    },
-    {
-      id: 87,
-      x: 1150,
-      y: 200,
-      r: 20,
-      description: "",
-      col: 22,
-      clicked: false
-    },
-    {
-      id: 88,
-      x: 1150,
-      y: 250,
-      r: 20,
-      description: "",
-      col: 22,
-      clicked: false
-    },
-    {
-      id: 89,
-      x: 1200,
-      y: 100,
-      r: 20,
-      description: "",
-      col: 23,
-      clicked: false
-    },
-    {
-      id: 90,
-      x: 1200,
-      y: 150,
-      r: 20,
-      description: "",
-      col: 23,
-      clicked: false
-    },
-    {
-      id: 91,
-      x: 1200,
-      y: 200,
-      r: 20,
-      description: "",
-      col: 23,
-      clicked: false
-    },
-    {
-      id: 92,
-      x: 1200,
-      y: 250,
-      r: 20,
-      description: "",
-      col: 23,
-      clicked: false
-    },
-    {
-      id: 93,
-      x: 1250,
-      y: 100,
-      r: 20,
-      description: "",
-      col: 24,
-      clicked: false
-    },
-    {
-      id: 94,
-      x: 1250,
-      y: 150,
-      r: 20,
-      description: "",
-      col: 24,
-      clicked: false
-    },
-    {
-      id: 95,
-      x: 1250,
-      y: 200,
-      r: 20,
-      description: "",
-      col: 24,
-      clicked: false
-    },
+    { id: 73, x: 1000, y: 100, r: 20, description: "", col: 19, clicked: false },
+    { id: 74, x: 1000, y: 150, r: 20, description: "", col: 19, clicked: false },
+    { id: 75, x: 1000, y: 200, r: 20, description: "", col: 19, clicked: false },
+    { id: 76, x: 1000, y: 250, r: 20, description: "", col: 19, clicked: false },
+    { id: 77, x: 1050, y: 100, r: 20, description: "", col: 20, clicked: false },
+    { id: 78, x: 1050, y: 150, r: 20, description: "", col: 20, clicked: false },
+    { id: 79, x: 1050, y: 200, r: 20, description: "", col: 20, clicked: false },
+    { id: 80, x: 1050, y: 250, r: 20, description: "", col: 20, clicked: false },
+    { id: 81, x: 1100, y: 100, r: 20, description: "", col: 21, clicked: false },
+    { id: 82, x: 1100, y: 150, r: 20, description: "", col: 21, clicked: false },
+    { id: 83, x: 1100, y: 200, r: 20, description: "", col: 21, clicked: false },
+    { id: 84, x: 1100, y: 250, r: 20, description: "", col: 21, clicked: false },
+    { id: 85, x: 1150, y: 100, r: 20, description: "", col: 22, clicked: false },
+    { id: 86, x: 1150, y: 150, r: 20, description: "", col: 22, clicked: false },
+    { id: 87, x: 1150, y: 200, r: 20, description: "", col: 22, clicked: false },
+    { id: 88, x: 1150, y: 250, r: 20, description: "", col: 22, clicked: false },
+    { id: 89, x: 1200, y: 100, r: 20, description: "", col: 23, clicked: false },
+    { id: 90, x: 1200, y: 150, r: 20, description: "", col: 23, clicked: false },
+    { id: 91, x: 1200, y: 200, r: 20, description: "", col: 23, clicked: false },
+    { id: 92, x: 1200, y: 250, r: 20, description: "", col: 23, clicked: false },
+    { id: 93, x: 1250, y: 100, r: 20, description: "", col: 24, clicked: false },
+    { id: 94, x: 1250, y: 150, r: 20, description: "", col: 24, clicked: false },
+    { id: 95, x: 1250, y: 200, r: 20, description: "", col: 24, clicked: false },
     { id: 96, x: 1250, y: 250, r: 20, description: "", col: 24, clicked: false }
   ],
   currentPebble: {},
@@ -390,10 +185,7 @@ const reducer = (state, action) => {
       var newAllocations = new Map();
       newState.pebbles.forEach((p) =>
         newAllocations.has(p.description)
-          ? newAllocations.set(
-              p.description,
-              newAllocations.get(p.description) + 1
-            )
+          ? newAllocations.set( p.description, newAllocations.get(p.description) + 1)
           : newAllocations.set(p.description, 1)
       );
 
@@ -407,28 +199,20 @@ const reducer = (state, action) => {
       );
       const newPebblesCompleted = newPebbles.filter((p) => p.clicked).length;
       const newCurrentPebble = newPebbles.filter(
-        (pebble) => pebble.id === action.payload.id
-      )[0];
-      return {
-        ...state,
-        pebbles: newPebbles,
-        pebblesCompleted: newPebblesCompleted,
+        (pebble) => pebble.id === action.payload.id)[0];
+      return { ...state, pebbles: newPebbles, pebblesCompleted: newPebblesCompleted,
         currentPebble: newCurrentPebble
       };
 
     case "GET_PEBBLES_COMPLETED":
-      const countPebblesCompleted = state.pebbles.filter((p) => p.clicked)
-        .length;
+      const countPebblesCompleted = state.pebbles.filter((p) => p.clicked).length;
       return { ...state, pebblesCompleted: countPebblesCompleted };
 
     case "ALLOCATIONS":
       var newAllocations = new Map();
       state.pebbles.forEach((p) =>
         newAllocations.has(p.description)
-          ? newAllocations.set(
-              p.description,
-              newAllocations.get(p.description) + 1
-            )
+          ? newAllocations.set( p.description, newAllocations.get(p.description) + 1)
           : newAllocations.set(p.description, 1)
       );
       return { ...state, allocations: newAllocations };
@@ -438,9 +222,7 @@ const reducer = (state, action) => {
         const loadedState = action.payload;
         const allocationsToMap = new Map([...loadedState.allocations]);
         return { ...loadedState, allocations: allocationsToMap };
-      } else {
-        return state;
-      }
+      } else { return state; }
 
     case "RESET_STATE":
       return initialState;
@@ -463,31 +245,19 @@ export default function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const loadData = async () => {
-    let headers = {
-      method: "POST",
-      headers: {
-        Accept: "*/*",
-        "Content-Type": "application/json"
-      },
+    let headers = { method: "POST",
+      headers: { Accept: "*/*", "Content-Type": "application/json" },
       body: JSON.stringify({ "type": "GET_PEBBLES", "payload": { "userid": 1, "search_date": "2022-09-06"}})
     };
 
-    const response = await fetch(
-      "https://vercel-sqlalchemy.vercel.app/api",
-      headers
-    );
-
+    const response = await fetch( "https://vercel-sqlalchemy.vercel.app/api", headers);
     const content = await response;
     const data = await content.json()
-    
     return data
   };
 
   useEffect(() => {
-    dispatch({
-      type: "LOAD_STATE",
-      payload: JSON.parse(window.localStorage.getItem("state"))
-    });
+    dispatch({ type: "LOAD_STATE", payload: JSON.parse(window.localStorage.getItem("state")) });
     dispatch({ type: "GET_PEBBLES_COMPLETED" });
   }, []);
 
@@ -500,35 +270,18 @@ export default function App() {
             style={{ width: "100%", backgroundColor: "#fafafa" }}
           >
             {state.pebbles.map(({ id, r, x, y, description, clicked }) => {
-              return id % 4 === 0 ? (
-                <>
-                  <Pebble
-                    key={id}
-                    id={id}
-                    r={r}
-                    cx={x}
-                    cy={y}
-                    description={description}
-                    clicked={clicked}
-                    dispatch={dispatch}
-                  />
+              return id % 4 === 0 
+              ? ( <>
+                  <Pebble key={id} id={id} r={r} cx={x} cy={y} description={description}
+                    clicked={clicked} dispatch={dispatch} />
                   <text fill="lightgrey" x={x - 10} y={y + 50}>
                     {id / 4 > 12 ? id / 4 - 12 : id / 4}
                   </text>
-                </>
-              ) : (
-                <>
-                  {" "}
-                  <Pebble
-                    key={id}
-                    id={id}
-                    r={r}
-                    cx={x}
-                    cy={y}
+                </>) 
+              : ( <> {" "} <Pebble key={id} id={id} r={r} cx={x} cy={y}
                     description={description}
                     clicked={clicked}
-                    dispatch={dispatch}
-                  />
+                    dispatch={dispatch} />
                 </>
               );
             })}
