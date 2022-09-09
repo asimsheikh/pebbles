@@ -167,6 +167,7 @@ const initialState = {
   currentPebble: {},
   pebblesCompleted: 0,
   pebblesTarget: 0,
+  currentDate: new Date(),
   allocations: new Map()
 };
 
@@ -229,7 +230,8 @@ const reducer = (state, action) => {
 
     case "LOAD_FROM_DATASTORE":
       console.log('In load from datastore')
-      let storeState = JSON.parse(action.payload.data.state)
+      let createdAtDate = JSON.parse(action.payload.data.created_at)
+      let storeState = { currentDate: createdAtDate, ...JSON.parse(action.payload.data.state)}
       return storeState 
 
     case "SAVE_TO_DATASTORE":
@@ -248,7 +250,7 @@ export default function App() {
     let headers = { method: "POST",
       headers: { Accept: "*/*", "Content-Type": "application/json" },
       body: JSON.stringify({ "type": "GET_PEBBLES",
-                             "payload": { "userid": 1, "search_date": "2022-09-07"}}) };
+                             "payload": { "userid": 1, "search_date": "2022-09-08"}}) };
 
     const response = await fetch( "https://vercel-sqlalchemy.vercel.app/api", headers);
     const content = await response;
