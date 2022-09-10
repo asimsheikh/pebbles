@@ -223,19 +223,20 @@ const reducer = (state, action) => {
         const loadedState = action.payload;
         const allocationsToMap = new Map([...loadedState.allocations]);
         return { ...loadedState, allocations: allocationsToMap };
-      } else { return state; }
+      } else { return state }
 
     case "RESET_STATE":
       return initialState;
 
     case "LOAD_FROM_DATASTORE":
       console.log('In load from datastore')
-      let createdAtDate = JSON.parse(action.payload.data.created_at)
+      let createdAtDate = new Date(action.payload.data.created_at)
       let storeState = { currentDate: createdAtDate, ...JSON.parse(action.payload.data.state)}
       return storeState 
 
     case "SAVE_TO_DATASTORE":
       console.log("SAVE_TO_DATASTORE");
+      console.log(state.currentDate)
       return state;
 
     default:
@@ -247,10 +248,15 @@ export default function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const loadData = async () => {
+
+    let currentDate = new Date(state.currentDate)
+    let pd = new Date(currentDate.valueOf() - 1000*60*60*24)
+    let searchDate = `${pd.getFullYear()}-${String(pd.getMonth()+1).padStart(2, '0')}-${String(pd.getDate()).padStart(2, '0')}`
+
     let headers = { method: "POST",
       headers: { Accept: "*/*", "Content-Type": "application/json" },
       body: JSON.stringify({ "type": "GET_PEBBLES",
-                             "payload": { "userid": 1, "search_date": "2022-09-08"}}) };
+                             "payload": { "userid": 1, "search_date": searchDate}}) };
 
     const response = await fetch( "https://vercel-sqlalchemy.vercel.app/api", headers);
     const content = await response;
@@ -305,7 +311,7 @@ export default function App() {
         <button
           className="bg-blue-400 my-2 w-1/3 p-2 text-lg text-white rounded-lg mr-2 "
           onClick={() => {
-            const jsonState = { ...state, allocations: [...state.allocations] };
+            const jsonState = { ...state, allocations: [...state.allocations], currentDate: new Date() };
             window.localStorage.setItem("state", JSON.stringify(jsonState));
           }}
         >
