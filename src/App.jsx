@@ -167,7 +167,7 @@ const initialState = {
   currentPebble: {},
   pebblesCompleted: 0,
   pebblesTarget: 0,
-  currentDate: null, 
+  currentDate: new Date().toDateString(), 
   allocations: new Map()
 };
 
@@ -271,7 +271,7 @@ export default function App() {
 
   return (
     <>
-      <div className="text-2xl font-bold pl-4">{state.currentDate  === null ? 'Waiting....': new Date(state.currentDate).toDateString().slice(4)}</div>
+      <div className="text-2xl font-bold pl-4">{new Date(state.currentDate).toDateString()}</div>
       <div className="text-2xl flex flex-row">
         <div className="w-3/4">
           <svg
