@@ -1,5 +1,6 @@
 import React, { useState, useReducer, useEffect } from "react";
 import './index.css'
+import FramerComponent from './FramerComponent';
 
 const Pebble = ({ id, cx, cy, r, description, clicked, dispatch }) => {
   return (
@@ -271,6 +272,7 @@ export default function App() {
 
   return (
     <>
+     <FramerComponent />
       <div className="text-2xl font-bold pl-4">{new Date(state.currentDate).toDateString()}</div>
       <div className="text-2xl flex flex-row">
         <div className="w-3/4">
