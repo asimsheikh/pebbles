@@ -247,8 +247,15 @@ const reducer = (state, action) => {
 export default function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const loadData = async () => {
-    let pd = new Date(new Date(state.currentDate).valueOf() - 1000*60*60*24)
+  const loadData = async (prev) => {
+    console.log('loadData')
+    console.log(prev)
+    let pd;
+    if (prev === true) {
+      pd = new Date(new Date(state.currentDate).valueOf() - 1000*60*60*24)
+    } else {
+      pd = new Date(new Date(state.currentDate).valueOf() + 1000*60*60*24)
+    }
     let searchDate = `${pd.getFullYear()}-${String(pd.getMonth()+1).padStart(2, '0')}-${String(pd.getDate()).padStart(2, '0')}`
     let headers = { method: "POST",
       headers: { Accept: "*/*", "Content-Type": "application/json" },
@@ -267,7 +274,7 @@ export default function App() {
 
   return (
     <>
-     <FramerComponent />
+     {/* <FramerComponent /> */}
       <div className="text-2xl font-bold pl-4">{new Date(state.currentDate).toDateString()}</div>
       <div className="text-2xl flex flex-row">
         <div className="w-3/4">
@@ -306,42 +313,25 @@ export default function App() {
       </div>
       <PebbleCounter state={state} />
       <div className="w-2/3 m-4">
-        <button
-          className="bg-blue-400 my-2 w-1/3 p-2 text-lg text-white rounded-lg mr-2 "
+        <button className="bg-blue-400 my-2 w-1/3 p-2 text-lg text-white rounded-lg mr-2 "
           onClick={() => {
             const jsonState = { ...state, allocations: [...state.allocations], currentDate: new Date() };
             window.localStorage.setItem("state", JSON.stringify(jsonState));
-          }}
-        >
-          Save
-        </button>
-        <button
-          className="bg-blue-400 my-2 w-1/3 p-2 text-lg text-white rounded-lg mr-2 "
-          onClick={() => {
-            dispatch({ type: "RESET_STATE" });
-          }}
-        >
-          Reset
-        </button>
+          }} > Save </button>
 
-        <button
-          className="bg-blue-400 my-2 w-1/3 p-2 text-lg text-white rounded-lg mr-2 "
-          onClick={async () => { 
-            let data = await loadData()
+        <button className="bg-blue-400 my-2 w-1/3 p-2 text-lg text-white rounded-lg mr-2 "
+          onClick={() => { dispatch({ type: "RESET_STATE" }); }} > Reset </button>
+
+        <button className="bg-blue-400 my-2 w-1/3 p-2 text-lg text-white rounded-lg mr-2 "
+          onClick={async () => { let data = await loadData(true)
             dispatch({ type: "LOAD_FROM_DATASTORE", payload: { data: data}})
-          }}
-        >
-          Load Store
-        </button>
+          }} > Load Prev Store </button>
 
-        <button
-          className="bg-blue-400 my-2 w-1/3 p-2 text-lg text-white rounded-lg mr-2 "
-          onClick={() => {
-            dispatch({ type: "SAVE_TO_DATASTORE" });
-          }}
-        >
-          Save Store
-        </button>
+        <button className="bg-blue-400 my-2 w-1/3 p-2 text-lg text-white rounded-lg mr-2 "
+          onClick={async () => { let data = await loadData(false)
+            dispatch({ type: "LOAD_FROM_DATASTORE", payload: { data: data}})
+          }} > Load Next Store </button>
+
       </div>
     </>
   );
