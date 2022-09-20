@@ -47,7 +47,11 @@ const PebblesAllocation = ({ allocations }) => {
         {[...allocations].map((key) => {
           return key[0] === "" 
                 ? ( <p></p>) 
-                : ( <p> {key[1]} {key[0]} </p>) })}
+                : ( <div className="flex flex-row">
+                      <p className="px-2 basis-1/12"> {key[1]} </p> 
+                      <p className="px-2 basis-1/2">{key[0]} </p> 
+                      <p className="px-2">{key[1] * 15 / 60} hours</p> 
+                    </div>) })}
       </div>
     </div>
   );
