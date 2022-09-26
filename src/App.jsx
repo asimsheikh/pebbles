@@ -43,16 +43,17 @@ const PebblesAllocation = ({ allocations }) => {
   return (
     <div className="mt-8 text-2xl text-gray-600 font-bold">
       <p>Pebble Allocations</p>
-      <div className="mt-2 text-xl font-normal">
+      <div className="mt-2 text-lg font-normal">
         {[...allocations].map((key) => {
           return key[0] === "" 
                 ? ( <p></p>) 
-                : ( <div className="flex flex-row">
+                : ( <div className="flex flex-row py-1/2">
                       <p className="px-2 basis-1/12"> {key[1]} </p> 
                       <p className="px-2 basis-1/2">{key[0]} </p> 
                       <p className="px-2">{key[1] * 15 / 60} hours</p> 
                     </div>) })}
       </div>
+      <div className="pl-2 mt-2 text-xl font-bold">{[...allocations].filter( item => item[0] !== '' ).reduce( (x,y) => x + y[1], 0) / 4} hours spent</div>
     </div>
   );
 };
@@ -281,7 +282,7 @@ export default function App() {
      {/* <FramerComponent /> */}
       <div className="text-2xl font-bold pl-4">{new Date(state.currentDate).toDateString()}</div>
       <div className="text-2xl flex flex-row">
-        <div className="w-3/4">
+        <div className="w-8/12">
           <svg
             viewBox="0 0 1400 700"
             style={{ width: "100%", backgroundColor: "#fafafa" }}
@@ -304,7 +305,7 @@ export default function App() {
             })}
           </svg>
         </div>
-        <div className="w-1/4 p-2">
+        <div className="w-4/12 p-2">
           <PebbleData
             key={state.currentPebble.id}
             id={state.currentPebble.id}
